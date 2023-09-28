@@ -4,7 +4,9 @@ const jwt = require("jsonwebtoken")
 const db = require('../models/index')
 const loginUser = async (req, res) => {
     try {
+
         const { email, password } = req.body;
+
         if (!email || !password) {
             res.status(400).send({ message: "please enter the details" })
         } else {
@@ -12,10 +14,10 @@ const loginUser = async (req, res) => {
             const user = await User.findOne({
                 where: { email },
             });
-            const existuser = user.dataValues
-            if (!existuser) {
+            if (!user) {
                 res.status(400).send({ message: "user is not exist in the db" })
             } else {
+                const existuser = user.dataValues
                 const comparePassword = bcrypt.compareSync(password, existuser.password)
                 if (comparePassword) {
                     let jwtSecretKey = 'Manishverma88180';
@@ -25,7 +27,7 @@ const loginUser = async (req, res) => {
                     }
                     var token = jwt.sign(data1, jwtSecretKey);
                     res.cookie("jwt", token)
-                    res.status(200).send({ message: "user is login succesfully" })
+                    res.render("profile")
                 } else {
                     res.status(400).send({ message: "password mIsmatch" })
                 }

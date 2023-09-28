@@ -10,7 +10,8 @@ const userRegistration = async (req, res) => {
         const name = req.body.name
         const password = req.body.password
         const phone = req.body.phone
-        const image = req.file.path
+        const image = `http://localhost:7000/images/` + req.file.filename
+
         if (!name || !password || !email || !phone || !image) {
             res.status(400).send({ message: "please enter all the details" })
         } else {
@@ -18,9 +19,6 @@ const userRegistration = async (req, res) => {
             if (!validemail) {
                 res.status(400).send({ message: "please enter the valid email address" })
             } else {
-
-
-
                 const Users = db.Users
                 const user = await Users.findOne({
                     where: { email },
@@ -35,11 +33,9 @@ const userRegistration = async (req, res) => {
                         password: hashpasswrd,
                         image: image,
                         contactInfo: phone
-
                     })
-                    res.status(200).send({ message: "user is created" })
+                    res.render("login")
                 }
-
             }
 
         }

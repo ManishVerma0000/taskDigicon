@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .profile {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .profile .user-details {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile .user-details img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .profile .user-details .user-info {
+            flex-grow: 1;
+        }
+
+        .profile .user-details .user-info h2 {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .profile .user-details .user-info p {
+            margin: 5px 0;
+        }
+
+        .profile .user-bio {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+    <script>
+        fetch('http://localhost:7000/me')
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                } else {
+                    throw new Error('Failed to fetch data');
+                }
+            }).then(htmlContent => {
+                console.log(JSON.parse(htmlContent));
+                const details = JSON.parse(htmlContent)
+                console.log(details['data'].email)
+                const userName = document.querySelector('.user-info h2');
+                userName.textContent = details['data'].name
+                const useremail = document.querySelector('.user-info p')
+                useremail.textContent = details['data'].email
+                const userimage = details['data'].image
+                var imgElement = document.querySelector(".user-details img");
+                imgElement.src = userimage
+                const phonenumber = details['data'].contactInfo
+                const imageelement = document.querySelector('.user-bio p')
+                imageelement.textContent = phonenumber
+                const id = details['data'].id
+                document.getElementById('updateProfileButton').addEventListener('click', function () {
+                    // Replace 'customerId' with the actual customer ID
+                    const customerId = id; // Replace with your customer ID
+                    alert("hide")
+                    window.location.href = `/updateprofile/${customerId}`;
+                 
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+
+
+    </script>
+</head>
+
+<body>
+    <div class="profile">
+        <h1>User Profile</h1>
+        <div class="user-details">
+            <img src="user-avatar.jpg" alt="User Avatar">
+            <div class="user-info">
+                <h2>John Doe</h2>
+                <p>Email: john@example.com</p>
+            </div>
+        </div>
+        <div class="user-bio">
+            <p>
+            </p>
+        </div>
+        <div class="user-biopassword">
+            <p>
+            </p>
+        </div>
+        <div class="profile-image-section">
+            <button id="updateProfileButton">
+                UpdateProfile
+            </button>
+
+        </div>
+    </div>
+</body>
+
+</html>

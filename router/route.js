@@ -1,15 +1,7 @@
 const express = require("express")
 
 const multer = require('multer')
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         cb(null, 'images')
-//     },
-//     filename: function (req, file, cb) {
 
-//         cb(null, file.fieldname)
-//     }
-// })
 
 const multerStorage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -27,13 +19,16 @@ const upload = multer({
 });
 
 const router = express.Router()
-
+const UpdateProfileoftheuser = require("../controller/update-profile")
 const loginUser = require("../controller/loginController")
 const userRegistration = require("../controller/RegistrationController")
+const UpdateProfile = require("../controller/updateProfile")
 const auth = require("../middleware/authMe")
 
+router.post("/updateProfile/:userId", upload.single('file'), UpdateProfileoftheuser)
+router.get("/updateprofile/:id", UpdateProfile)
 router.get('/me', auth)
-router.post('/register', upload.single('images'), userRegistration)
+router.post('/register', upload.single('file'), userRegistration)
 router.post("/login", loginUser)
 
 

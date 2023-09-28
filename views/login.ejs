@@ -1,3 +1,33 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <!-- Add your CSS stylesheets here -->
+<!-- </head>
+
+<body>
+    <h1>Login</h1>
+    <form action="/login" method="POST">
+        <label for="email">Username:</label>
+        <input type="text" id="email" name="email" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <input type="submit" value="Log in">
+    </form>
+</body>
+
+</html> --> -->
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,16 +38,29 @@
 </head>
 
 <body>
-    <h1>Login</h1>
-    <form action="/login" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <input type="submit" value="Log in">
-    </form>
+    <div style="display: flex;
+    justify-content: center;
+    align-items: center;
+    ">
+        <div>
+            <h1>Login</h1>
+            <form action="/login" method="POST">
+                <label for="email" style="font-size: larger;font-weight: 700;">Username:</label>
+                <input type="text" id="email" name="email" required style="height: 30px; width: 300px; margin: 10px;">
+                <br>
+                <label for="password" style="font-size: larger;font-weight: 700;">Password:</label>
+                <input type="password" id="password" name="password" required
+                    style="height: 30px; width: 300px; margin: 10px;">
+                <br>
+                <div>
+                    <input type="submit" value="Log in" style="height: 50px;width: 100px; border-radius: 10px;">
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
 </body>
 
 </html>

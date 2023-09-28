@@ -2,7 +2,6 @@ const db = require('../models/index')
 const bcrypt = require("bcryptjs")
 const updateProfile = async (req, res) => {
     try {
-
         const id = req.params.userId
         const { password, email, phone } = req.body;
         const object = {}

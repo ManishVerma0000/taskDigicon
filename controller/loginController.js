@@ -20,7 +20,7 @@ const loginUser = async (req, res) => {
                 const existuser = user.dataValues
                 const comparePassword = bcrypt.compareSync(password, existuser.password)
                 if (comparePassword) {
-                    let jwtSecretKey = 'Manishverma88180';
+                    let jwtSecretKey = process.env.KEY;
                     let data1 = {
                         time: Date.now() + 1000 * 60 * 60 * 24,
                         userId: { email: existuser.email },

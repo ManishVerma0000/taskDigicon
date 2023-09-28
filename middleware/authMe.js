@@ -9,7 +9,7 @@ const auth = async (req, res, next) => {
         if (!token) {
             res.status(401).send({ message: "unauthrosied" })
         } else {
-            const verifyuser = await jwt.verify(token, "Manishverma88180");
+            const verifyuser = await jwt.verify(token, process.env.KEY);
             console.log(verifyuser['userId'].email);
             const valieemail = verifyuser['userId'].email
             if (!valieemail) {

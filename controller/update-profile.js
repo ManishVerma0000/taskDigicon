@@ -19,6 +19,7 @@ const updateProfile = async (req, res) => {
             const image = `http://localhost:7000/images/` + req.file.filename
             object['image'] = image
         }
+        console.log(object)
         const Users = db.Users
         const data = await Users.update(object, {
             where: {
